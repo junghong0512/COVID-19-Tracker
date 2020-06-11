@@ -1,30 +1,33 @@
 import axios from "axios";
 
 const url = "https://covid19.mathdro.id/api";
-const urlDaily = "https://covid19.mathdro.id/api/daily";
-const urlKorea = "https://covid19.mathdro.id/api/countries/KOR";
-// const urlDailyKorea = "https://covid19.mathdro.id/api/daily/";
 
-export const fetchData = async () => {
+const yesterdayFormat = () => {
   let yesterday = new Date();
   yesterday.setDate(new Date().getDate() - 2);
-  const yesterdayUrlFormat =
+  return (
     yesterday.getMonth() +
     1 +
     "-" +
     yesterday.getDate() +
     "-" +
-    yesterday.getFullYear();
+    yesterday.getFullYear()
+  );
+};
 
-  const urlDailyKorea =
-    "https://covid19.mathdro.id/api/daily/" + yesterdayUrlFormat;
+export const fetchData = async () => {
+  const yesterdayUrlFormat = yesterdayFormat();
+
+  const urlDailyKorea = `${url}/daily/${yesterdayUrlFormat}`;
 
   try {
     const {
       data: { confirmed, recovered, deaths, lastUpdate },
     } = await axios.get(url);
 
-    const { data } = await axios.get(urlDaily);
+    const { data } = await axios.get(`${url}/daily`);
+
+    const { data: yesterdayData } = await axios.get(urlDailyKorea);
 
     const {
       data: {
@@ -33,9 +36,7 @@ export const fetchData = async () => {
         recovered: { value: todayKoreaRecovered },
         lastUpdate: lastUpdateKorea,
       },
-    } = await axios.get(urlKorea);
-
-    const { data: yesterdayData } = await axios.get(urlDailyKorea);
+    } = await axios.get(`${url}/countries/KOR`);
 
     const yesterdayKorea = yesterdayData.find(
       (item) => item.countryRegion === "Korea, South"

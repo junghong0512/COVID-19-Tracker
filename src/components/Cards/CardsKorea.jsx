@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid, Box, Paper, Divider } from "@material-ui/core";
+import { Typography, Grid, Paper, Divider } from "@material-ui/core";
 
 import Countup from "react-countup";
 import cx from "classnames";
@@ -36,7 +36,7 @@ const InfoKorea = ({
       <Grid container spacing={3} justify="space-around">
         <Grid item>
           <Typography variant="h6">
-            확진자:
+            확진자:{" "}
             <span>
               <Countup
                 start={0}
@@ -59,7 +59,7 @@ const InfoKorea = ({
         </Grid>
         <Grid item>
           <Typography variant="h6">
-            사망자:
+            사망자:{" "}
             <span>
               <Countup
                 start={0}
@@ -82,7 +82,7 @@ const InfoKorea = ({
         </Grid>
         <Grid item>
           <Typography variant="h6">
-            완치자:
+            완치자:{" "}
             <span>
               <Countup
                 start={0}
