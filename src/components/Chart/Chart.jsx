@@ -12,8 +12,6 @@ const Charts = () => {
       setDailyData(await fetchDailyData());
     };
 
-    console.log(dailyData);
-
     fetchAPI();
   });
 
@@ -31,7 +29,7 @@ const Charts = () => {
           {
             data: dailyData.map(({ deaths }) => deaths),
             label: "Deaths",
-            borderColor: "tan",
+            borderColor: "red",
             backgroundColor: "rgba(255, 0, 0, 0.5)",
             fill: true,
           },

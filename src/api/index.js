@@ -72,7 +72,9 @@ export const fetchDailyData = async () => {
   try {
     const { data } = await axios.get(`${url}/daily`);
 
-    const modifiedData = data.map((dailyData) => ({
+    const slicedData = data.slice(data.length - 60, data.length);
+
+    const modifiedData = slicedData.map((dailyData) => ({
       confirmed: dailyData.confirmed.total,
       deaths: dailyData.deaths.total,
       date: dailyData.reportDate,
