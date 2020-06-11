@@ -5,7 +5,16 @@ import cx from "classnames";
 
 import styles from "./Cards.module.css";
 
-const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
+const Info = ({
+  data: {
+    confirmed,
+    recovered,
+    deaths,
+    lastUpdate,
+    dailyConfirmed,
+    dailyDeaths,
+  },
+}) => {
   if (!confirmed) {
     return "Loading...";
   }
@@ -22,7 +31,7 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected
+              총 확진
             </Typography>
             <Typography variant="h5">
               <Countup
@@ -31,6 +40,16 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                 duration={1.5}
                 separator=","
               />
+            </Typography>
+            <Typography variant="h6" style={{ color: "tomato" }}>
+              (+
+              <Countup
+                start={0}
+                end={dailyConfirmed}
+                duration={1.5}
+                separator=","
+              />
+              )
             </Typography>
             <Typography color="textSecondary">
               {new Date(lastUpdate).toDateString()}
@@ -49,7 +68,7 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Recovered
+              총 회복
             </Typography>
             <Typography variant="h5">
               <Countup
@@ -76,7 +95,7 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Death
+              총 사망
             </Typography>
             <Typography variant="h5">
               <Countup
@@ -85,6 +104,16 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                 duration={1.5}
                 separator=","
               />
+            </Typography>
+            <Typography variant="h6" style={{ color: "tomato" }}>
+              (+
+              <Countup
+                start={0}
+                end={dailyDeaths}
+                duration={1.5}
+                separator=","
+              />
+              )
             </Typography>
             <Typography color="textSecondary">
               {new Date(lastUpdate).toDateString()}
