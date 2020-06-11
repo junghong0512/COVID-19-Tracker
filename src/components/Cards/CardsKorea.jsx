@@ -20,8 +20,6 @@ const InfoKorea = ({
     return "Loading...";
   }
 
-  console.log(lastUpdateKorea);
-
   return (
     <Paper className={cx(styles.koreaCardMain)} padding={3}>
       <Typography
