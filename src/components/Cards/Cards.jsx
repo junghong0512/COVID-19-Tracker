@@ -14,6 +14,7 @@ const Info = ({
     dailyConfirmed,
     dailyDeaths,
   },
+  country,
 }) => {
   if (!confirmed) {
     return "Loading...";
@@ -31,7 +32,7 @@ const Info = ({
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              총 확진
+              총 확진{country ? `(${country})` : null}
             </Typography>
             <Typography variant="h5">
               <Countup
@@ -41,16 +42,19 @@ const Info = ({
                 separator=","
               />
             </Typography>
-            <Typography variant="h6" style={{ color: "tomato" }}>
-              (+
-              <Countup
-                start={0}
-                end={dailyConfirmed}
-                duration={1.5}
-                separator=","
-              />
-              )
-            </Typography>
+            {country ? null : (
+              <Typography variant="h6" style={{ color: "tomato" }}>
+                (+
+                <Countup
+                  start={0}
+                  end={dailyConfirmed}
+                  duration={1.5}
+                  separator=","
+                />
+                )
+              </Typography>
+            )}
+
             <Typography color="textSecondary">
               {new Date(lastUpdate).toDateString()}
             </Typography>
@@ -68,7 +72,7 @@ const Info = ({
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              총 회복
+              총 회복{country ? `(${country})` : null}
             </Typography>
             <Typography variant="h5">
               <Countup
@@ -95,7 +99,7 @@ const Info = ({
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              총 사망
+              총 사망{country ? `(${country})` : null}
             </Typography>
             <Typography variant="h5">
               <Countup
@@ -105,16 +109,18 @@ const Info = ({
                 separator=","
               />
             </Typography>
-            <Typography variant="h6" style={{ color: "tomato" }}>
-              (+
-              <Countup
-                start={0}
-                end={dailyDeaths}
-                duration={1.5}
-                separator=","
-              />
-              )
-            </Typography>
+            {country ? null : (
+              <Typography variant="h6" style={{ color: "tomato" }}>
+                (+
+                <Countup
+                  start={0}
+                  end={dailyDeaths}
+                  duration={1.5}
+                  separator=","
+                />
+                )
+              </Typography>
+            )}
             <Typography color="textSecondary">
               {new Date(lastUpdate).toDateString()}
             </Typography>
